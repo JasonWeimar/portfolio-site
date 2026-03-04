@@ -1,7 +1,12 @@
 import { Section } from "./components/layout/Section";
 import { Container } from "./components/layout/Container";
 import { Button } from "./components/ui/Button";
-import { Card } from "./components/ui/Card"
+import { Card } from "./components/ui/Card";
+import { featuredProjects } from "./data/projects";
+import { proofTiles } from "./data/proofTiles";
+import { FeaturedProjects } from "./sections/FeaturedProjects";
+import { ProofTiles } from "./sections/ProofTiles";
+import { AboutThisSite } from "./sections/AboutThisSite";
 
 export default function App() {
   return (
@@ -68,28 +73,15 @@ export default function App() {
 
       {/* Projects placeholder */}
       <Section id="projects" eyebrow="Work" title="Featured Projects">
-        <div className="grid gap-4 md:grid-cols-3">
-          <Card className="p-6">
-            <p className="text-sm font-semibold">Flagship App (MVP)</p>
-            <p className="mt-2 text-sm text-(--muted)">
-              Polished UI product that proves front-end strength + AWS depth.
-            </p>
-          </Card>
+        <FeaturedProjects items={featuredProjects} />
+      </Section>
 
-          <Card className="p-6">
-            <p className="text-sm font-semibold">Portfolio Shell (This Site)</p>
-            <p className="mt-2 text-sm text-(--muted)">
-              S3 + CloudFront + Route 53 + ACM. Fast, cheap, verifiable.
-            </p>
-          </Card>
+      <Section eyebrow="Proof" title="Quick proof">
+        <ProofTiles items={proofTiles} />
+      </Section>
 
-          <Card className="p-6">
-            <p className="text-sm font-semibold">AWS Workflow Lab</p>
-            <p className="mt-2 text-sm text-(--muted)">
-              One clear pipeline with “what it proves” + diagram.
-            </p>
-          </Card>
-        </div>
+      <Section id="about-this-site" eyebrow="Details" title="About this website">
+        <AboutThisSite />
       </Section>
 
       {/* About placeholder */}
