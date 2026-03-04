@@ -1,5 +1,30 @@
 @import "tailwindcss";
 
-html, body, #root {
-    height: 100%;
+:root {
+  /* Core surfaces */
+  --bg: #09090b;        /* zinc-950-ish */
+  --surface: #0f0f14;   /* slightly lifted */
+  --surface2: #12121a;
+
+  /* Text */
+  --text: #fafafa;
+  --muted: #a1a1aa;     /* zinc-400-ish */
+
+  /* Lines + accents */
+  --border: rgba(255, 255, 255, 0.10);
+  --accent: #7c3aed;    /* violet-600-ish */
+  --accent2: #22c55e;   /* green-500-ish (optional) */
+
+  /* Radii */
+  --radius-lg: 18px;
 }
+
+html, body, #root {
+  height: 100%;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+}
+
