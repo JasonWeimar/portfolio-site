@@ -11,11 +11,11 @@
  * - When your app grows, this stays readable because each section is a small component.
  */
 
-import { Section } from "./components/layout/Section";
+import { siteConfig } from "./data/siteConfig";
 import { Container } from "./components/layout/Container";
+import { Section } from "./components/layout/Section";
 import { Button } from "./components/ui/Button";
 import { Card } from "./components/ui/Card";
-import { siteConfig } from "./data/siteConfig";
 
 // Data (content) lives in src/data so UI stays clean and edits are fast.
 import { featuredProjects } from "./data/projects";
@@ -25,6 +25,7 @@ import { proofTiles } from "./data/proofTiles";
 import { FeaturedProjects } from "./sections/FeaturedProjects";
 import { ProofTiles } from "./sections/ProofTiles";
 import { AboutThisSite } from "./sections/AboutThisSite";
+import { Now } from "./sections/Now";
 
 export default function App() {
   return (
@@ -89,7 +90,7 @@ export default function App() {
 
           {/* H1: one clear promise. Keep it short and confident. */}
           <h1 className="mt-3 text-4xl font-semibold tracking-tight sm:text-5xl">
-            I ship polished UI and production-minded AWS systems.
+            {siteConfig.headline}
           </h1>
 
           {/* Supporting line: gives stack + credibility without bloating hero. */}
@@ -152,6 +153,10 @@ export default function App() {
         <ProofTiles items={proofTiles} />
       </Section>
 
+      <Section eyebrow="Status" title="Now">
+        <Now items={siteConfig.now} />
+      </Section>
+
       {/**
        * About This Website (engineer-verifiable depth)
        * - This is where you “show your work” for S3/CloudFront + deploy flow
@@ -160,30 +165,33 @@ export default function App() {
         <AboutThisSite />
       </Section>
 
-      {/* About (placeholder for now; Step D/C+ will tighten copy) */}
+      {/* About */}
       <Section id="about" eyebrow="Bio" title="About">
         <Card className="p-6">
-          <p className="text-sm text-(--muted)">
-            Short, credible bio goes here. (We’ll tighten copy in Step D.)
-          </p>
+          <div className="space-y-4">
+            {siteConfig.about.map((para) => (
+              <p key={para} className="text-sm leading-relaxed text-(--muted)">
+                {para}
+              </p>
+            ))}
+          </div>
         </Card>
       </Section>
 
-      {/* Contact (placeholder URLs; Step D will swap in real links) */}
-      <Section id="contact" eyebrow="Reach out" title="Contact">
+      {/* Contact  */}
+      <Section id="contact" eyebrow="Reach out" title="Contact | Socials">
         <div className="flex flex-wrap gap-3">
-          {/* mailto gives “one click contact” (high conversion). */}
-          <Button href="mailto:JasonCWeimar@Gmail.com" variant="primary">
-            Email Me
-          </Button>
-
-          {/* External links should open in new tab */}
-          <Button href="https://www.linkedin.com/in/jason-weimar-3b6592228/" variant="secondary" target="_blank" rel="noreferrer">
-            LinkedIn
-          </Button>
-          <Button href="https://github.com/JasonWeimar" variant="secondary" target="_blank" rel="noreferrer">
-            GitHub
-          </Button>
+          {siteConfig.socials.map((s) => (
+            <Button
+              key={s.label}
+              href={s.href}
+              variant={s.label === "Email" ? "primary" : "secondary"}
+              target={s.external ? "_blank" : undefined}
+              rel={s.external ? "noreferrer" : undefined}
+            >
+              {s.label}
+            </Button>
+          ))}
         </div>
       </Section>
 

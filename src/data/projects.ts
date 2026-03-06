@@ -119,15 +119,15 @@ export const featuredProjects: FeaturedProject[] = [
              *
              * improve this in Step D by adding a real link or a "coming soon" anchor.
              */
-            { label: "Plan", href: "#projects", external: false }, //teomporary
+            { label: "Plan", href: "#projects", external: false }, //temporary
         ],
         tags: ["React", "TypeScript", "AWS"],
     },
 
     {
-        title: "Portfolio Shell — S3 + CloudFront",
+        title: "Profile Site — S3 + CloudFront",
         description:
-            "This site hosted on AWS with a simple, cheap, always-on architecture.",
+            "This profile site deployed on AWS with a simple, cheap, always-on architecture.",
         proves: [
             "Static hosting + CDN + HTTPS",
             "Caching + invalidation awareness",
@@ -135,8 +135,8 @@ export const featuredProjects: FeaturedProject[] = [
         ],
         diagram: "Browser → CloudFront → (OAC) S3",
         links: [
-            // Replace with your real CloudFront/custom-domain URL
-            { label: "Live", href: "https://<your-domain-or-cloudfront>", external: true }, // TODO
+            // Site Repo
+            { label: "Repo", href: "https://github.com/JasonWeimar/portfolio-site", external: true },
 
             // Internal anchor to the About This Website section (engineer verification)
             { label: "Infra Notes", href: "#about-this-site", external: false },
@@ -145,9 +145,9 @@ export const featuredProjects: FeaturedProject[] = [
     },
 
     {
-        title: "AWS Workflow Lab — (Lab 04 or 05)",
+        title: "AWS Workflow Lab — S3 → Lambda → DynamoDB (Image Metadata Pipeline)",
         description:
-            "One clear AWS workflow with screenshots + diagram + ‘what it proves’.",
+            "This lab builds an event-driven serverless ingestion pipeline: when an image is uploaded to S3, an S3 ObjectCreated event triggers a TypeScript Lambda that fetches object metadata via HeadObject and writes a normalized record to DynamoDB using a conditional write for idempotency. CloudWatch Logs provide evidence and debugging telemetry.",
         proves: [
             "Event-driven thinking (trigger → handler → persistence)",
             "IAM least-privilege patterns",
@@ -155,11 +155,11 @@ export const featuredProjects: FeaturedProject[] = [
         ],
         diagram: "S3 → Lambda → DynamoDB",
         links: [
-            // Swap to the exact lab repo link (Lab 04 or Lab 05)
-            { label: "Repo", href: "https://github.com/JasonWeimar/aws-dev-lab", external: true }, // TODO confirm },
+            // Lab repo
+            { label: "Repo", href: "https://github.com/JasonWeimar/AWS-Dev-Labs/tree/main/labs/04-image-metadata-pipeline", external: true },
 
-            // Optional: later you can replace with a README deep-link or live demo page
-            { label: "Readme", href: "https://github.com/JasonWeimar/aws-dev-lab/blob/main/labs/04-.../README.md", external: true }, // TODO },
+            // Lab ReadMe
+            { label: "Readme", href: "https://github.com/JasonWeimar/AWS-Dev-Labs/blob/main/labs/04-image-metadata-pipeline/README.md", external: true },
         ],
         tags: ["Lambda", "DynamoDB", "Step Functions"],
     },

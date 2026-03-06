@@ -17,6 +17,8 @@
  */
 
 import { Card } from "../components/ui/Card";
+import { Button } from "../components/ui/Button";
+import { siteConfig } from "../data/siteConfig";
 
 export function AboutThisSite() {
     return (
@@ -71,6 +73,16 @@ export function AboutThisSite() {
                     <p className="mt-3 text-xs text-(--muted)">
                         Cost note: S3 + CloudFront is low-cost for a personal site, and scales automatically without a server.
                     </p>
+                    <div className="mt-4 flex flex-wrap gap-2">
+                        <Button
+                            href={siteConfig.links.siteRepo} //TODO replace with 'Live' URL once configured
+                            variant="secondary"
+                            target="_blank"
+                            rel="noreferrer"
+                        >
+                            View site source (GitHub)
+                        </Button>
+                    </div>
                 </div>
             </div>
         </Card>
