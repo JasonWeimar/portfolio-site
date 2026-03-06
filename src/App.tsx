@@ -84,7 +84,7 @@ export default function App() {
       <section className="py-16 sm:py-20">
         <Container>
           {/* Eyebrow line: small positioning statement (scan-first). */}
-          <p className="test-sm font-medium text-(--muted)">
+          <p className="text-sm font-medium text-(--muted)">
             {siteConfig.tagline}
           </p>
 
@@ -94,23 +94,29 @@ export default function App() {
           </h1>
 
           {/* Supporting line: gives stack + credibility without bloating hero. */}
-          <p className="mt-5 max-2-2xl text-(--muted)">
+          <p className="mt-5 max-w-2xl text-(--muted)">
             {siteConfig.summary}
           </p>
 
           {/* Primary CTAs: “View Projects” is the conversion goal. */}
-          <div className="flex flex-wrap gap-3 mt-5">
-            {siteConfig.socials.map((s) => (
-              <Button
-                key={s.label}
-                href={s.href}
-                variant={s.label === "Email" ? "primary" : "secondary"}
-                target={s.external ? "_blank" : undefined}
-                rel={s.external ? "noreferrer" : undefined}
-              >
-                {s.label}
-              </Button>
-            ))}
+          <div className="mt-8 flex flex-wrap gap-3">
+            <Button href="#projects" variant="primary">
+              View Projects
+            </Button>
+
+            <Button href="#contact" variant="secondary">
+              Contact
+            </Button>
+
+            {/* Optional: GitHub visible up top */}
+            <Button
+              href={siteConfig.links.github}
+              variant="secondary"
+              target="_blank"
+              rel="noreferrer"
+            >
+              GitHub
+            </Button>
           </div>
 
           {/**
@@ -129,7 +135,7 @@ export default function App() {
               AWS Cloud Practitioner
             </span>
             <span className="rounded-full border border-(--border) px-3 py-1">
-              CompTIA A+
+              Enterprise IT Leadership
             </span>
           </div>
         </Container>
@@ -179,7 +185,7 @@ export default function App() {
       </Section>
 
       {/* Contact  */}
-      <Section id="contact" eyebrow="Reach out" title="Contact | Socials">
+      <Section id="contact" eyebrow="Reach out" title="Contact">
         <div className="flex flex-wrap gap-3">
           {siteConfig.socials.map((s) => (
             <Button
