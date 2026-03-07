@@ -65,6 +65,7 @@ export const siteConfig = {
         email: "JasonCWeimar@Gmail.com",
         linkedin: "https://www.linkedin.com/in/jason-weimar-3b6592228/",
         github: "https://github.com/JasonWeimar",
+        liveurl: "https://www/jasonweimarstack1.com",
         siteRepo: "https://github.com/JasonWeimar/portfolio-site",
         instagram: "https://www.instagram.com/jasonweimar",
         calendly: "", //  later
