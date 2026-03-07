@@ -77,7 +77,7 @@ deploy.sh
 npm install
 npm run dev
 ```
-### Build artifact**
+### Build artifact
 
 ```bash
 npm run build
@@ -135,7 +135,7 @@ ___
 ### 03 — Hero Layout (Initial Scaffold)
 ![03 Hero](docs/screenshots/03-hero.png)
 
-### 04 — Project Cards Layout (Design Spine)**
+### 04 — Project Cards Layout (Design Spine)
 ![04 Project Cards](docs/screenshots/04-project-cards.png)
 
 ### 05 — Mobile Layout Verification
@@ -146,32 +146,32 @@ ___
 ### 06 — Featured Projects Rendering from Data
 ![06 Featured Projects Data](docs/screenshots/06-featured-projects-data.png)
 
-### 07 — Proof Tiles Section**
+### 07 — Proof Tiles Section
 ![07 Proof Tiles](docs/screenshots/07-proof-tiles.png)
 
-### 08 — “About This Website” Section (Initial)**
+### 08 — “About This Website” Section (Initial)
 ![08 About This Website](docs/screenshots/08-about-this-website.png)
 
 ## Step E — Polished story sections
 
-### 09 — Hero Section (Final Copy + CTAs)**
+### 09 — Hero Section (Final Copy + CTAs)
 ![09 Hero Section](docs/screenshots/09-hero-section.png)
 
-### 10 — Bio / About Section (Paragraph Layout)**
+### 10 — Bio / About Section (Paragraph Layout)
 ![10 Bio About Section](docs/screenshots/10-bio-about-section.png)
 
-### 11 — “Now” Section (Current Focus)**
+### 11 — “Now” Section (Current Focus)
 ![11 Now Section](docs/screenshots/11-now-section.png)
 
-### 12 — Featured Projects Section (Final)**
+### 12 — Featured Projects Section (Final)
 ![12 Featured Projects Section](docs/screenshots/12-featured-projects-section.png)
 
-### 13 — Contact / Social Section**
+### 13 — Contact / Social Section
 ![13 Contact Social Section](docs/screenshots/13-contact-social-section.png)
 
 ## Step F — AWS hosting + custom domain
 
-### 14 — S3 Bucket Origin (Private)**
+### 14 — S3 Bucket Origin (Private)
 ![14 S3 Bucket Origin](docs/screenshots/14-s3-bucket-origin.png)
 
 ### 15 — CloudFront Distribution + Custom Domain Certificate**
@@ -180,22 +180,22 @@ ___
 ### 16 — CloudFront Origin Access Control (OAC)**
 ![16 CloudFront Origin OAC](docs/screenshots/16-cloudfront-origin-oac.png)
 
-### 17 — CloudFront SPA Routing (403/404 → /index.html)**
+### 17 — CloudFront SPA Routing (403/404 → /index.html)
 ![17 CloudFront SPA Routing](docs/screenshots/17-cloudfront-spa-routing.png)
 
-### 18 — Live Site Loaded via CloudFront**
+### 18 — Live Site Loaded via CloudFront
 ![18 Live Site CloudFront](docs/screenshots/18-live-site-cloudfront.png)
 
-### 19 — Deploy Script Run (CLI Proof)**
+### 19 — Deploy Script Run (CLI Proof)
 ![19 Deploy Script CLI](docs/screenshots/19-deploy-script-cli.png)
 
-### 20 — ACM Certificate Issued (Apex + WWW)**
+### 20 — ACM Certificate Issued (Apex + WWW)
 ![20 ACM Certificate Issued](docs/screenshots/20-acm-certificate-issued.png)
 
-### 21 — Route 53 Alias Records (Apex + WWW → CloudFront)**
+### 21 — Route 53 Alias Records (Apex + WWW → CloudFront)
 ![21 Route53 Alias Records](docs/screenshots/21-route53-alias-records.png)
 
-### 22 — HTTPS Certificate Proof in Browser**
+### 22 — HTTPS Certificate Proof in Browser
 ![22 HTTPS Certificate Issued](docs/screenshots/22-https-certificate-issued.png)
 
 # IAM / Security Flow (how access works)
