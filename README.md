@@ -4,7 +4,9 @@
 
 **Live:** https://jasonweimarstack1.com  
 **Repo:** https://github.com/JasonWeimar/portfolio-site  
-**Contact:** (Email/LinkedIn links)
+**Contact:** [Email](mailto:jasoncweimar@gmail.com.com) | [LinkedIn](https://www.linkedin.com/in/jason-weimar-3b6592228/)
+
+
 
 # Overview
 
