@@ -97,7 +97,7 @@ npm run build
 
 **dist/** (this is the deploy artifact uploaded to S3)
 
-___
+
 
 # Deployment (AWS)
 

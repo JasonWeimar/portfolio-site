@@ -26,6 +26,9 @@ set -euo pipefail
 #   It's still useful to require it so your environment stays consistent,
 #   and because other commands (or future script extensions) may rely on it.
 
+# Ensure valid SSO session (SSO creds expire)
+aws sts get-caller-identity --profile "${AWS_PROFILE}" >/dev/null 2>&1 || aws sso login --profile "${AWS_PROFILE}"
+
 echo "==> Building..."
 npm run build
 # ^ Build step:

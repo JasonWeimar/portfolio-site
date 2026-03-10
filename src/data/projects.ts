@@ -110,7 +110,7 @@ export const featuredProjects: FeaturedProject[] = [
         ],
         links: [
             // Replace with the actual flagship repo when it exists
-            { label: "Repo", href: "https://github.com/JasonWeimar", external: true },
+            { label: "Coming Soon", href: "#projects", external: false },
 
             /**
              * No live link yet, options:
@@ -158,8 +158,8 @@ export const featuredProjects: FeaturedProject[] = [
             // Lab repo
             { label: "Repo", href: "https://github.com/JasonWeimar/AWS-Dev-Labs/tree/main/labs/04-image-metadata-pipeline", external: true },
 
-            // Lab ReadMe
-            { label: "Readme", href: "https://github.com/JasonWeimar/AWS-Dev-Labs/blob/main/labs/04-image-metadata-pipeline/README.md", external: true },
+            // Labs ReadMe
+            { label: "Readme", href: "https://github.com/JasonWeimar/AWS-Dev-Labs", external: true },
         ],
         tags: ["Lambda", "DynamoDB", "Step Functions"],
     },
