@@ -5,86 +5,100 @@
  * - Centralize identity + links so you don't hardcode them in multiple files.
  *
  * Why this matters:
- * - Reduces mistakes (changing email in one place updates everywhere)
- * - Makes future refactors easy (e.g., adding Twitter/Calendly later)
- * - Makes App.tsx more "composition" and less "content"
+ * - Reduces mistakes (changing a link in one place updates everywhere)
+ * - Makes future refactors easy (add/remove socials without hunting through components)
+ * - Keeps App.tsx "composition" and not "content"
+ *
+ * Design rule:
+ * - `links` is the source of truth.
+ * - `socials` is derived from `links` so you don't duplicate URLs.
  */
 
+/**
+ * SocialLink
+ * ----------
+ * Used for the Contact/Socials section rendering.
+ */
 export type SocialLink = {
-    /** Visible label in the UI */
-    label: "Email" | "LinkedIn" | "GitHub" | "Calendly" | "Instagram";
-
-    /** Href used by <a> or our <Button href="..."> */
-    href: string;
-
-    /**
-     * external = true means:
-     * - open new tab
-     * - rel="noreferrer"
-     */
-    external?: boolean;
+  label: "Email" | "LinkedIn" | "GitHub" | "Calendly" | "Instagram";
+  href: string;
+  external?: boolean;
 };
 
 export const siteConfig = {
-    /** Your display name */
-    name: "Jason Weimar",
+  /** Display name */
+  name: "Jason Weimar",
 
-    /**
-     * My one-line positioning (hero eyebrow or hero subline).
-     * Keep short and specific.
-     */
-    tagline: "Full-Stack + AWS Cloud Dev Specialist ",
+  /**
+   * Hero eyebrow line (short identity label).
+   */
+  tagline: "Full-Stack Developer · AWS Cloud Specialist",
 
-    /**
-     * A slightly longer line that explains my value.
-     * 1–2 sentences max.
-     */
-    headline: "I ship polished UI and production-minded AWS systems.",
+  /**
+   * Hero headline (outcome statement).
+   * Updated to reflect "What I Build" framing from resume.
+   */
+  headline:
+    "Serverless AWS architectures. Event-driven pipelines. Full-stack applications.",
 
-    summary:
-        "React + TypeScript + Tailwind frontends deployed on AWS with serverless and cloud-native architectures.",
+  /**
+   * Hero supporting line (tech + approach).
+   * Tightened to lead with what I build, then tie to flagship project.
+   */
+  summary:
+    "AWS-certified full-stack developer building production-grade serverless systems and polished React frontends. IAM and access control design included. Currently shipping ClientFlow Portal — a full-stack SaaS spanning 9 AWS services end-to-end.",
 
-    about: [
-        "I’m a cloud-focused builder with an enterprise IT foundation and a strong eye for design. I’m AWS certified and I like systems that are fast to verify: clear logs, clean infra, predictable behavior.",
-        "I started in operations leadership (uBreakiFix/Asurion), then joined Lockheed Martin as L3 Desktop Support, handling deployments, imaging, escalations, and complex troubleshooting with a structured, logs-first approach. Most recently I served as a Senior IT Systems Project Lead at the U.S. Patent &amp; Trademark Office, coordinating projects end-to-end, building SOPs/training, and improving workflows across systems and network components.",
-        "Alongside enterprise work, I earned a Full-Stack Software Development certification through Coding Dojo (accredited by Colorado Technical University and used within their B.S. Computer Science curriculum), covering JavaScript/MERN, Python, and Java. I’m comfortable designing across both relational (SQL) and non-relational (MongoDB/DynamoDB) data models, and I enjoy building full projects where the front end and back end fit together cleanly.",
-        "Outside of work, I’m a lifelong creative—music production, photography (post + color grading), and graphic design. That background shows up in my UI work: layout, polish, and details that make products feel intentional. I’m excited by any software engineering role where I can ship end-to-end—especially roles leaning front end—while still getting to build reliable backend logic and AWS workflows.",
-    ],
+  /**
+   * About paragraphs.
+   */
+  about: [
+    "AWS Certified Developer (DVA-C02) and full-stack engineer building serverless systems on AWS and polished React frontends. I care about things that are fast to verify: clear logs, least-privilege IAM, predictable behavior end-to-end.",
+    "My background is enterprise IT — Lockheed Martin L3 Desktop Support, then Senior IT Systems Project Lead at the U.S. Patent & Trademark Office. That means I've worked in zero-downtime environments, written SOPs that other people actually use, and debugged production issues with structured root-cause methodology. That context makes me a better cloud engineer: I scope permissions properly, instrument for observability early, and build systems that are easy to hand off.",
+    "On the development side, I'm full-stack across React, JavaScript/TypeScript, Node, Python, and serverless AWS. I'm comfortable with both relational and non-relational data models and I like building projects where the frontend and backend fit together cleanly - not simply wired up, but designed to work as a system.",
+    "Outside of development, I'm a lifelong creative (music production, photography, color grading, design). That shows up directly in my UI work: layout decisions, typographic rhythm, color choices - the details that give a product feeling, intent and style.",
+    "I'm excited for the oportunity to join & grow with team, building something on AWS.",
+  ] as const,
 
-    now: [
-        "Shipping this profile site and tightening the story (projects + proof).",
-        "Building a flagship app MVP that highlights front-end strength.",
-        "Continuing AWS workflow labs (evidence-first READMEs + screenshots).",
-    ],
+  /**
+   * "Now" bullets — current focus (2–4 max for scanability).
+   * Updated: March 2026
+   */
+  now: [
+    "ClientFlow Portal — Phase E in progress: wiring remaining pages to live Lambda + API Gateway endpoints. Phases complete: A (AWS CLI, monorepo scaffold, Figma design), B (all 24 React components), C (main.tsx, useAuth, apiClient, router, forms), D (Lambda functions + API Gateway).",
+    "Next up for ClientFlow: Phase F — deploy to S3 + CloudFront + GitHub Actions CI/CD pipeline.",
+    "Continuing AWS workflow labs with evidence-first READMEs and CloudWatch telemetry.",
+    "Actively seeking roles in serverless full-stack or cloud-native web application development — React + Node/TypeScript frontend with AWS Lambda, DynamoDB, Cognito, and EventBridge on the backend. Best fit: teams building SaaS products, internal tools, or APIs on AWS where both UI quality and backend reliability matter.",
+  ] as const,
 
+  /**
+   * Primary outbound links (SOURCE OF TRUTH)
+   */
+  links: {
+    email: "mailto:JasonCWeimar@gmail.com",
+    linkedin: "https://www.linkedin.com/in/jason-weimar-3b6592228/",
+    github: "https://github.com/JasonWeimar",
+    liveUrl: "https://jasonweimarstack1.com",
+    siteRepo: "https://github.com/JasonWeimar/portfolio-site",
+    resume: "https://jasonweimarstack1.com/resume.pdf",
+    instagram: "https://www.instagram.com/jasonweimar",
+    calendly: "",
+  } as const,
 
-    /**
-     * Primary outbound links.
-     */
-    links: {
-        email: "JasonCWeimar@Gmail.com",
-        linkedin: "https://www.linkedin.com/in/jason-weimar-3b6592228/",
-        github: "https://github.com/JasonWeimar?tab=repositories",
-        liveurl: "https://www/jasonweimarstack1.com",
-        siteRepo: "https://github.com/JasonWeimar/portfolio-site",
-        instagram: "https://www.instagram.com/jasonweimar",
-        calendly: "", //  later
+  /**
+   * Convenience list for rendering UI.
+   */
+  socials: [
+    { label: "Email", href: "mailto:JasonCWeimar@gmail.com", external: false },
+    {
+      label: "LinkedIn",
+      href: "https://www.linkedin.com/in/jason-weimar-3b6592228/",
+      external: true,
     },
-
-    /**
-     * Convenience list for rendering UI.
-     * This avoids repeated mapping logic in components.
-     */
-    socials: [
-        { label: "Email", href: "JasonCWeimar@Gmail.com", external: false },
-        {
-            label: "LinkedIn",
-            href: "https://www.linkedin.com/in/jason-weimar-3b6592228/",
-            external: true,
-        },
-        { label: "GitHub", href: "https://github.com/JasonWeimar", external: true },
-        { label: "Instagram", href: "https://www.instagram.com/jasonweimar", external: true }
-        // TODO Add Calendly later
-    ] satisfies SocialLink[],
-
+    { label: "GitHub", href: "https://github.com/JasonWeimar", external: true },
+    {
+      label: "Instagram",
+      href: "https://www.instagram.com/jasonweimar",
+      external: true,
+    },
+  ] satisfies readonly SocialLink[],
 } as const;

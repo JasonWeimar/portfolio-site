@@ -12,22 +12,22 @@
 import { Card } from "../components/ui/Card";
 
 type NowProps = {
-    items: readonly string[];
+  items: readonly string[];
 };
 
 export function Now({ items }: NowProps) {
-    return (
-        <Card className="p-6">
-            <p className="text-sm font-semibold">Right now</p>
+  return (
+    <Card className="p-6">
+      <p className="text-sm font-semibold">Right now</p>
 
-            <ul className="mt-3 space-y-2 text-sm text-(--muted)">
-                {items.map((x) => (
-                    <li key={x} className="flex gap-2">
-                        <span className="mt-1.5 inline-block h-1.5 w-1.5 rounded-full bg-[var(--accent)]" />
-                        <span>{x}</span>
-                    </li>
-                ))}
-            </ul>
-        </Card>
-    );
+      <ul className="mt-3 space-y-2 text-sm text-(--muted)">
+        {items.map((x) => (
+          <li key={x} className="flex gap-2">
+            <span className="mt-1.5 block h-1.5 w-1.5 flex-shrink-0 rounded-full bg-[var(--accent)]" />
+            <span>{x}</span>
+          </li>
+        ))}
+      </ul>
+    </Card>
+  );
 }

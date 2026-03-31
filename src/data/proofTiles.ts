@@ -4,72 +4,85 @@
  * Purpose:
  * - Provide "fast scan" credibility blocks (like a mini-resume grid).
  *
- * Why tiles work:
- * - Recruiters skim. Hiring managers skim. Engineers skim.
- * - Tiles are high-signal with minimal reading effort.
- *
- * Design rule:
- * - Each tile should contain 3–5 short lines max.
- *   (Keeps density consistent and prevents paragraphs.)
+ * Single source of truth:
+ * - Proof links come from siteConfig to prevent drift.
  */
+
+import { siteConfig } from "./siteConfig";
 
 /**
- * A tuple type that enforces 3–5 lines.
- *
- * Teaching note:
- * - A tuple encodes "exact structure" in TypeScript.
- * - This prevents a tile from accidentally becoming 8 lines and wrecking the layout.
- *
- * Allowed:
- * - [a,b,c]
- * - [a,b,c,d]
- * - [a,b,c,d,e]
+ * ProofLine
+ * ---------
+ * A tile line can be plain text or a link object.
+ */
+export type ProofLine =
+  | string
+  | {
+      label: string;
+      href: string;
+      external?: boolean;
+    };
+
+/**
+ * TileLines — enforces 3–5 lines per tile.
  */
 export type TileLines =
-    | readonly [string, string, string]
-    | readonly [string, string, string, string]
-    | readonly [string, string, string, string, string];
+  | readonly [ProofLine, ProofLine, ProofLine]
+  | readonly [ProofLine, ProofLine, ProofLine, ProofLine]
+  | readonly [ProofLine, ProofLine, ProofLine, ProofLine, ProofLine];
 
 export type ProofTile = {
-    /** Tile heading (short + scannable) */
-    title: string;
-
-    /** 3–5 lines (enforced by the TileLines tuple union) */
-    lines: TileLines;
+  title: string;
+  lines: TileLines;
 };
 
-export const proofTiles: ProofTile[] = [
-    {
-        title: "Certs",
-        lines: [
-            "Coding Dojo Full-Stack",
-            "AWS Developer Associate",
-            "AWS Cloud Practitioner",
-        ],
-    },
-    {
-        title: "Stack",
-        lines: [
-            "React + TypeScript",
-            "TailwindCSS",
-            "Node.js",
-            "AWS (Lambda/DDB/CloudFront)",
-        ],
-    },
-    {
-        title: "Current focus",
-        lines: [
-            "Ship profile site",
-            "Build flagship MVP",
-            "Polish UI system + deploy flow",
-        ],
-    },
-    {
-        title: "Looking for",
-        lines: [
-            "Front-end / Full-stack",
-            "AWS-focused teams",
-            "Product-minded environment",
-        ],
-    },
-];
+export const proofTiles = [
+  {
+    title: "This Site",
+    lines: [
+      {
+        label: "Live site",
+        href: siteConfig.links.liveUrl,
+        external: true,
+      },
+      {
+        label: "Source (GitHub)",
+        href: siteConfig.links.siteRepo,
+        external: true,
+      },
+      "React + TypeScript + TailwindCSS",
+      "S3 + CloudFront OAC · content-hashed assets",
+    ],
+  },
+  {
+    title: "Credentials",
+    lines: [
+      "AWS Developer Associate (DVA-C02)",
+      "AWS Cloud Practitioner (CLF-C02)",
+      "Coding Dojo Full-Stack (CTU-aligned)",
+      "CompTIA A+",
+    ],
+  },
+  {
+    title: "Current Stack",
+    lines: [
+      "React 18 + TypeScript + TailwindCSS",
+      "TanStack Query · React Hook Form · Zod",
+      "AWS: Lambda · API Gateway · DynamoDB · Cognito",
+      "AWS: S3 · CloudFront · SES · SNS · EventBridge · IAM",
+    ],
+  },
+  {
+    title: "ClientFlow Portal",
+    lines: [
+      "Phase E — Wiring pages to live Lambda + API Gateway",
+      "Phases A–D complete: scaffold → components → auth/routing → Lambda/API",
+      "24 components · 7 screens · 9 AWS services · event-driven",
+      {
+        label: "View Figma",
+        href: "https://www.figma.com/proto/oJFmuI4LtDbxAclJpWCB4D/02-Screens-Desktop?page-id=0%3A1&node-id=10-2",
+        external: true,
+      },
+    ],
+  },
+] as const satisfies readonly ProofTile[];

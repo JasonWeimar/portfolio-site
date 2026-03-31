@@ -2,29 +2,117 @@
 
 :root {
   /* Core surfaces */
-  --bg: #09090b;        /* zinc-950-ish */
-  --surface: #0f0f14;   /* slightly lifted */
+  --bg: #09090b; /* zinc-950-ish */
+  --surface: #0f0f14; /* slightly lifted */
   --surface2: #12121a;
 
   /* Text */
   --text: #fafafa;
-  --muted: #a1a1aa;     /* zinc-400-ish */
+  --muted: #a1a1aa; /* zinc-400-ish */
 
   /* Lines + accents */
-  --border: rgba(255, 255, 255, 0.10);
-  --accent: #7c3aed;    /* violet-600-ish */
-  --accent2: #22c55e;   /* green-500-ish (optional) */
+  --border: rgba(255, 255, 255, 0.13); /* was 0.10 — slightly more visible */
+  --accent: #7c3aed; /* violet-600-ish */
+  --accent2: #22c55e; /* green-500-ish (optional) */
 
   /* Radii */
   --radius-lg: 18px;
 }
 
-html, body, #root {
+html,
+body,
+#root {
   height: 100%;
 }
 
 body {
   background: var(--bg);
   color: var(--text);
+
+  /*
+   * Radial gradient: breaks the flat black.
+   * A faint violet bloom centered at top-center gives the page a light source.
+   * 80% of the body stays pure --bg so it stays understated.
+   */
+  background-image: radial-gradient(
+    ellipse 80% 50% at 50% -10%,
+    rgba(124, 58, 237, 0.12) 0%,
+    transparent 80%
+  );
+  background-attachment: fixed;
 }
 
+/*
+ * Cards: add a very faint violet tint to --surface so they read
+ * as distinct from the page background. Without this they're
+ * near-identical near-blacks and cards "disappear".
+ *
+ * Target the Card component's backdrop-blur div via the class
+ * it always renders. bg-[color:var(--surface)]/60 becomes the hook.
+ */
+[class*="bg-[color:var(--surface)]"] {
+  background-color: rgba(22, 16, 36, 0.65) !important;
+  box-shadow:
+    0 1px 0 0 rgba(255, 255, 255, 0.05) inset,
+    /* top edge catch-light */ 0 4px 24px -4px rgba(0, 0, 0, 0.5); /* soft drop shadow */
+}
+
+/*
+ * Section borders: replace the hard 1px white/10 line with a
+ * gradient fade so sections "breathe" rather than cut.
+ * Targets the footer border-t and any border-t border-(--border) element.
+ */
+footer {
+  border-top: none !important;
+  position: relative;
+}
+footer::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60%;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(124, 58, 237, 0.4) 30%,
+    rgba(124, 58, 237, 0.4) 70%,
+    transparent
+  );
+}
+
+/*
+ * Accent dot on nav links: a 2px underline that slides in on hover.
+ * Feels more intentional than opacity change alone.
+ */
+header nav a {
+  position: relative;
+  text-decoration: none;
+}
+header nav a::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--accent);
+  border-radius: 99px;
+  transition: width 0.2s ease;
+}
+header nav a:hover::after {
+  width: 100%;
+}
+
+/*
+ * Proof pills in hero: subtle glow on hover so they feel interactive.
+ */
+.proof-pill:hover {
+  border-color: rgba(124, 58, 237, 0.5);
+  box-shadow: 0 0 12px -2px rgba(124, 58, 237, 0.3);
+  transition:
+    border-color 0.2s,
+    box-shadow 0.2s;
+}

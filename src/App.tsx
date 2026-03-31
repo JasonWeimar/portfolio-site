@@ -1,31 +1,27 @@
 /**
  * App.tsx (Step C)
  * ----------------
- * This file is the "table of contents" for your one-page site.
+ * "Table of Contents" for site.
  *
- * Design principle:
- * - Keep App.tsx focused on composition (what sections exist, in what order).
- * - Avoid stuffing "content data" here (projects + tiles live in src/data).
- *
- * Teaching note:
- * - When your app grows, this stays readable because each section is a small component.
+ * concept note:
+ * - As app grows, this stays readable because each section is a small component.
  */
 
-import { siteConfig } from "./data/siteConfig";
 import { Container } from "./components/layout/Container";
 import { Section } from "./components/layout/Section";
 import { Button } from "./components/ui/Button";
 import { Card } from "./components/ui/Card";
+import { siteConfig } from "./data/siteConfig";
 
 // Data (content) lives in src/data so UI stays clean and edits are fast.
 import { featuredProjects } from "./data/projects";
 import { proofTiles } from "./data/proofTiles";
 
 // Sections (UI) render data in consistent, reusable layouts.
-import { FeaturedProjects } from "./sections/FeaturedProjects";
-import { ProofTiles } from "./sections/ProofTiles";
 import { AboutThisSite } from "./sections/AboutThisSite";
+import { FeaturedProjects } from "./sections/FeaturedProjects";
 import { Now } from "./sections/Now";
+import { ProofTiles } from "./sections/ProofTiles";
 
 export default function App() {
   return (
@@ -33,7 +29,7 @@ export default function App() {
       {/**
        * Skip link (accessibility):
        * Helps keyboard/screen-reader users jump past the sticky nav.
-       * This is a tiny pro-signal and costs almost nothing.
+
        */}
       <a
         href="#projects"
@@ -46,7 +42,7 @@ export default function App() {
       <header
         className={[
           /**
-           * Why sticky + blur?
+           * sticky + blur:
            * - Keeps navigation visible while scrolling.
            * - Blur + translucent background maintains readability without feeling heavy.
            *
@@ -61,19 +57,35 @@ export default function App() {
       >
         <Container className="flex h-14 items-center justify-between">
           {/* Brand link: returns to top. */}
-          <a href="#" className="text-sm font-semibold tracking-tight" aria-label="Home">
+          <a
+            href="#"
+            className="text-sm font-semibold tracking-tight"
+            aria-label="Home"
+          >
             {siteConfig.name}
           </a>
 
           {/* Desktop nav only; on mobile we keep it clean for now. */}
-          <nav className="hidden items-center gap-6 sm:flex" aria-label="Primary navigation">
-            <a className="text-sm text-(--muted) hover:text-white" href="#projects">
+          <nav
+            className="hidden items-center gap-6 sm:flex"
+            aria-label="Primary navigation"
+          >
+            <a
+              className="text-sm text-(--muted) hover:text-white"
+              href="#projects"
+            >
               Projects
             </a>
-            <a className="text-sm text-(--muted) hover:text-white" href="#about">
+            <a
+              className="text-sm text-(--muted) hover:text-white"
+              href="#about"
+            >
               About
             </a>
-            <a className="text-sm text-(--muted) hover:text-white" href="#contact">
+            <a
+              className="text-sm text-(--muted) hover:text-white"
+              href="#contact"
+            >
               Contact
             </a>
           </nav>
@@ -88,17 +100,15 @@ export default function App() {
             {siteConfig.tagline}
           </p>
 
-          {/* H1: one clear promise. Keep it short and confident. */}
+          {/* H1 */}
           <h1 className="mt-3 text-4xl font-semibold tracking-tight sm:text-5xl">
             {siteConfig.headline}
           </h1>
 
-          {/* Supporting line: gives stack + credibility without bloating hero. */}
-          <p className="mt-5 max-w-2xl text-(--muted)">
-            {siteConfig.summary}
-          </p>
+          {/* Supporting line: */}
+          <p className="mt-5 max-w-2xl text-(--muted)">{siteConfig.summary}</p>
 
-          {/* Primary CTAs: “View Projects” is the conversion goal. */}
+          {/* Primary CTAs: */}
           <div className="mt-8 flex flex-wrap gap-3">
             <Button href="#projects" variant="primary">
               View Projects
@@ -108,7 +118,7 @@ export default function App() {
               Contact
             </Button>
 
-            {/* Optional: GitHub visible up top */}
+            {/* GitHub */}
             <Button
               href={siteConfig.links.github}
               variant="secondary"
@@ -117,13 +127,18 @@ export default function App() {
             >
               GitHub
             </Button>
+
+            <Button
+              href={siteConfig.links.resume}
+              variant="secondary"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Resume
+            </Button>
           </div>
 
-          {/**
-           * Proof pills:
-           * - quick “credential scent” without distracting from CTA
-           * - keep them subtle (muted) so the hero headline still wins
-           */}
+          {/* Proof-pills */}
           <div className="mt-10 flex flex-wrap gap-2 text-xs text-(--muted)">
             <span className="rounded-full border border-(--border) px-3 py-1">
               Coding Dojo Full-Stack Developer
@@ -151,9 +166,7 @@ export default function App() {
       </Section>
 
       {/**
-       * Proof Tiles (fast-scan credibility)
-       * - Like a mini resume grid
-       * - Great for recruiters; low effort to parse
+       * Proof Tiles:
        */}
       <Section eyebrow="Proof" title="Quick proof">
         <ProofTiles items={proofTiles} />
@@ -163,11 +176,11 @@ export default function App() {
         <Now items={siteConfig.now} />
       </Section>
 
-      {/**
-       * About This Website (engineer-verifiable depth)
-       * - This is where you “show your work” for S3/CloudFront + deploy flow
-       */}
-      <Section id="about-this-site" eyebrow="Details" title="About this website">
+      <Section
+        id="about-this-site"
+        eyebrow="Details"
+        title="About this website"
+      >
         <AboutThisSite />
       </Section>
 
@@ -198,14 +211,23 @@ export default function App() {
               {s.label}
             </Button>
           ))}
+          <Button
+            href={siteConfig.links.resume}
+            variant="secondary"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Resume
+          </Button>
         </div>
       </Section>
 
-      {/* Footer: tiny credibility + stack summary */}
+      {/* Footer: */}
       <footer className="border-t border-(--border) py-10">
         <Container>
           <p className="text-xs text-(--muted)">
-            © {new Date().getFullYear()} {siteConfig.name}. Built with React, TypeScript, Tailwind, and AWS.
+            © {new Date().getFullYear()} {siteConfig.name}. Built with React,
+            TypeScript, Tailwind, and AWS.
           </p>
         </Container>
       </footer>

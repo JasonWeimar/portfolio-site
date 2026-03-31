@@ -13,33 +13,25 @@
 
 /**
  * A link shown on a project card.
- *
- * Teaching note:
- * - We keep it small: label + href + external flag.
- * - This prevents "link objects" from becoming mini frameworks.
  */
 export type ProjectLink = {
-    /** Text shown on the button (e.g. "Live", "Repo", "Infra Notes") */
-    label: string;
+  /** Text shown on the button (e.g. "Live", "Repo", "Infra Notes") */
+  label: string;
 
-    /**
-     * URL or anchor.
-     * Examples:
-     * - External: "https://github.com/..."
-     * - Internal: "#about-this-site"
-     */
-    href: string;
+  /**
+   * URL or anchor.
+   * Examples:
+   * - External: "https://github.com/..."
+   * - Internal: "#about-this-site"
+   */
+  href: string;
 
-    /**
-     * If true, the UI treats this as an external link:
-     * - target="_blank"
-     * - rel="noreferrer"
-     *
-     * Why:
-     * - Keeps users on your site.
-     * - Avoids navigating away from the page while scanning.
-     */
-    external?: boolean;
+  /**
+   * If true, the UI treats this as an external link:
+   * - target="_blank"
+   * - rel="noreferrer"
+   */
+  external?: boolean;
 };
 
 /**
@@ -48,119 +40,151 @@ export type ProjectLink = {
  * "Design rule enforcement" via types:
  * - proves: exactly 3 bullets (tuple)
  * - links: exactly 2 CTAs (tuple)
- *
- * Why enforce?
- * - Keeps every card equally scannable
- * - Prevents future you from accidentally bloating one card
  */
 export type FeaturedProject = {
-    /** Title shown at top of the card */
-    title: string;
+  /** Title shown at top of the card */
+  title: string;
 
-    /** One sentence: what it is */
-    description: string;
+  /** One sentence: what it is */
+  description: string;
 
-    /**
-     * "What it proves" bullets (exactly 3).
-     * Recruiter scan: value quickly.
-     * Engineer scan: technical signals quickly.
-     */
-    proves: readonly [string, string, string];
+  /**
+   * "What it proves" bullets (exactly 3).
+   * Recruiter scan: value quickly.
+   * Engineer scan: technical signals quickly.
+   */
+  proves: readonly [string, string, string];
 
-    /**
-     * Optional tiny ASCII diagram.
-     * Why: engineers can verify architecture at a glance without a complex diagram tool.
-     */
-    diagram?: string;
+  /**
+   * Optional tiny ASCII diagram.
+   * Why: engineers can verify architecture at a glance without a complex diagram tool.
+   */
+  diagram?: string;
 
-    /**
-     * Two links max (exactly 2).
-     * Usually:
-     * - Live + Repo
-     * OR
-     * - Live + Infra Notes
-     */
-    links: readonly [ProjectLink, ProjectLink];
+  /**
+   * Two links max (exactly 2).
+   */
+  links: readonly [ProjectLink, ProjectLink];
 
-    /**
-     * Tags are optional. They’re "tech scent".
-     * Keep them short; UI will typically display 1–2.
-     */
-    tags?: readonly string[];
+  /**
+   * Tags are optional. They're "tech scent".
+   */
+  tags?: readonly string[];
+
+  /**
+   * Optional status badge.
+   * Signals build progress to engineers reviewing the portfolio.
+   */
+  status?: string;
 };
 
 /**
  * featuredProjects
  * ---------------
  * This array is the "source of truth" for the Featured Projects section.
- *
- * Teaching note:
- * - Your UI shouldn't care *which* projects exist — it just maps over this list.
- * - Later we can move this into JSON or a CMS, but right now: keep it local and simple.
  */
 export const featuredProjects: FeaturedProject[] = [
-    {
-        title: "Flagship App — (MVP)",
-        description:
-            "A polished UI product that proves front-end strength while still showcasing AWS competence.",
-        proves: [
-            "Front-end taste: layout, type scale, responsive behavior",
-            "Real data flow: state, loading/errors, edge cases",
-            "AWS depth: (services used in MVP)",
-        ],
-        links: [
-            // Replace with the actual flagship repo when it exists
-            { label: "Coming Soon", href: "#projects", external: false },
+  {
+    title: "ClientFlow Portal",
+    status: "In Progress — Phase E (API Integration)",
+    description:
+      "A full-stack serverless client portal for service businesses — structured request intake, real-time status tracking, file uploads via S3 pre-signed URLs, and event-driven email notifications.",
+    proves: [
+      "9 AWS services: Cognito, Lambda, API Gateway, DynamoDB, S3, CloudFront, SES, SNS, IAM — all wired end-to-end",
+      "React 18 + TypeScript + TailwindCSS — 24 components built across 7 screens with a 28-component Figma design system",
+      "Phases complete: A (scaffold + Figma) → B (components) → C (auth + routing) → D (Lambda + API Gateway). Phase E: live API wiring. Phase F: CI/CD deploy.",
+    ],
+    diagram:
+      "React → CloudFront → API Gateway (JWT/Cognito) → Lambda → DynamoDB\n                                                              ↓ EventBridge → SES / SNS",
+    links: [
+      {
+        label: "Repo",
+        href: "https://github.com/JasonWeimar/clientflow-portal",
+        external: true,
+      },
+      {
+        label: "Figma",
+        href: "https://www.figma.com/proto/oJFmuI4LtDbxAclJpWCB4D/02-Screens-Desktop?page-id=0%3A1&node-id=10-2&p=f&viewport=-201%2C410%2C0.08&t=7LZr5Vkwwvbm912B-1&scaling=min-zoom&content-scaling=fixed&starting-point-node-id=10%3A2",
+        external: true,
+      },
+    ],
+    tags: ["React", "TypeScript", "AWS", "TailwindCSS", "Serverless"],
+  },
 
-            /**
-             * No live link yet, options:
-             * 1) Point to a "Coming soon" section on page.
-             * 2) Leav as # for now (not ideal)
-             *
-             * improve this in Step D by adding a real link or a "coming soon" anchor.
-             */
-            { label: "Plan", href: "#projects", external: false }, //temporary
-        ],
-        tags: ["React", "TypeScript", "AWS"],
-    },
+  {
+    title: "GitHub Profile Lookup",
+    description:
+      "A React/Vite app that queries the GitHub Users REST API and renders profile data into a glass-morphism card. Built as a deliberate AJAX + async/await refresher — every step of the request lifecycle is annotated. Deployed on AWS S3 + CloudFront with OAC and a wildcard ACM cert.",
+    proves: [
+      "fetch() lifecycle: response.ok guard, async response.json(), try/catch for both network and HTTP errors — the patterns that trip up most juniors",
+      "Custom hook (useGithubUser) isolates all fetch state so components stay clean; SearchForm owns its own input state and only surfaces the submitted value",
+      "S3 + CloudFront OAC with block-all-public-access — subdomain deployed via existing Route 53 hosted zone, Vite content-hashed assets for safe long-term caching",
+    ],
+    diagram:
+      "Browser → Route 53 → CloudFront (OAC) → S3\n         └─ fetch() → api.github.com/users/{username}",
+    links: [
+      {
+        label: "Live",
+        href: "https://github-lookup.jasonweimarstack1.com/",
+        external: true,
+      },
+      {
+        label: "Repo",
+        href: "https://github.com/JasonWeimar/Mini-Projects/tree/main/github-profile-lookup",
+        external: true,
+      },
+    ],
+    tags: ["React", "Vite", "Fetch API", "S3", "CloudFront", "Route 53"],
+  },
 
-    {
-        title: "Profile Site — S3 + CloudFront",
-        description:
-            "This profile site deployed on AWS with a simple, cheap, always-on architecture.",
-        proves: [
-            "Static hosting + CDN + HTTPS",
-            "Caching + invalidation awareness",
-            "Reproducible deploy steps in repo",
-        ],
-        diagram: "Browser → CloudFront → (OAC) S3",
-        links: [
-            // Site Repo
-            { label: "Repo", href: "https://github.com/JasonWeimar/portfolio-site", external: true },
+  {
+    title: "Profile Site — S3 + CloudFront",
+    description:
+      "This profile site deployed on AWS with a simple, cheap, always-on architecture.",
+    proves: [
+      "Static hosting + CDN + HTTPS with Origin Access Control",
+      "Content-hashed assets — long-term CloudFront caching + targeted invalidation",
+      "Reproducible deploy steps documented in repo",
+    ],
+    diagram: "Browser → CloudFront → (OAC) S3",
+    links: [
+      {
+        label: "Repo",
+        href: "https://github.com/JasonWeimar/portfolio-site",
+        external: true,
+      },
+      {
+        label: "Infra Notes",
+        href: "#about-this-site",
+        external: false,
+      },
+    ],
+    tags: ["S3", "CloudFront", "Route 53", "React", "TypeScript"],
+  },
 
-            // Internal anchor to the About This Website section (engineer verification)
-            { label: "Infra Notes", href: "#about-this-site", external: false },
-        ],
-        tags: ["S3", "CloudFront", "Route 53"],
-    },
-
-    {
-        title: "AWS Workflow Lab — S3 → Lambda → DynamoDB (Image Metadata Pipeline)",
-        description:
-            "This lab builds an event-driven serverless ingestion pipeline: when an image is uploaded to S3, an S3 ObjectCreated event triggers a TypeScript Lambda that fetches object metadata via HeadObject and writes a normalized record to DynamoDB using a conditional write for idempotency. CloudWatch Logs provide evidence and debugging telemetry.",
-        proves: [
-            "Event-driven thinking (trigger → handler → persistence)",
-            "IAM least-privilege patterns",
-            "Reliability patterns (retries / idempotency)",
-        ],
-        diagram: "S3 → Lambda → DynamoDB",
-        links: [
-            // Lab repo
-            { label: "Repo", href: "https://github.com/JasonWeimar/AWS-Dev-Labs/tree/main/labs/04-image-metadata-pipeline", external: true },
-
-            // Labs ReadMe
-            { label: "Readme", href: "https://github.com/JasonWeimar/AWS-Dev-Labs", external: true },
-        ],
-        tags: ["Lambda", "DynamoDB", "Step Functions"],
-    },
+  {
+    title: "AWS Workflow Lab — S3 → Lambda → DynamoDB",
+    description:
+      "An event-driven serverless ingestion pipeline: S3 ObjectCreated triggers a TypeScript Lambda that fetches object metadata via HeadObject and writes a normalized record to DynamoDB with a conditional write for idempotency.",
+    proves: [
+      "Event-driven thinking: trigger → handler → persistence",
+      "IAM least-privilege patterns — scoped execution role per function",
+      "Reliability patterns: conditional writes for idempotency, CloudWatch telemetry",
+    ],
+    diagram:
+      "S3 ObjectCreated → Lambda (HeadObject) → DynamoDB (conditional write)",
+    links: [
+      {
+        label: "Repo",
+        href: "https://github.com/JasonWeimar/AWS-Dev-Labs/tree/main/labs/04-image-metadata-pipeline",
+        external: true,
+      },
+      {
+        label: "Labs README",
+        href: "https://github.com/JasonWeimar/AWS-Dev-Labs",
+        external: true,
+      },
+    ],
+    tags: ["Lambda", "DynamoDB", "S3", "TypeScript", "CloudWatch"],
+  },
 ];
