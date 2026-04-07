@@ -32,6 +32,13 @@ export type ProjectLink = {
    * - rel="noreferrer"
    */
   external?: boolean;
+
+  /**
+   * Optional button variant override.
+   * Defaults to "secondary" in the renderer.
+   * Use "ghost" for supplementary links (e.g. Figma, docs).
+   */
+  variant?: "primary" | "secondary" | "ghost";
 };
 
 /**
@@ -62,9 +69,11 @@ export type FeaturedProject = {
   diagram?: string;
 
   /**
-   * Two links max (exactly 2).
+   * Two primary links + optional third (e.g. ghost Figma/docs link).
    */
-  links: readonly [ProjectLink, ProjectLink];
+  links:
+    | readonly [ProjectLink, ProjectLink]
+    | readonly [ProjectLink, ProjectLink, ProjectLink];
 
   /**
    * Tags are optional. They're "tech scent".
@@ -86,17 +95,22 @@ export type FeaturedProject = {
 export const featuredProjects: FeaturedProject[] = [
   {
     title: "ClientFlow Portal",
-    status: "In Progress — Phase E (API Integration)",
+    status: "Live — Phase 3 in progress (CDK, X-Ray, custom domain)",
     description:
-      "A full-stack serverless client portal for service businesses — structured request intake, real-time status tracking, file uploads via S3 pre-signed URLs, and event-driven email notifications.",
+      "A full-stack serverless client portal for service businesses — structured request intake, real-time status tracking, file uploads via S3 pre-signed URLs, and event-driven email notifications via EventBridge + SES. Live and open for sign-up.",
     proves: [
-      "9 AWS services: Cognito, Lambda, API Gateway, DynamoDB, S3, CloudFront, SES, SNS, IAM — all wired end-to-end",
-      "React 18 + TypeScript + TailwindCSS — 24 components built across 7 screens with a 28-component Figma design system",
-      "Phases complete: A (scaffold + Figma) → B (components) → C (auth + routing) → D (Lambda + API Gateway). Phase E: live API wiring. Phase F: CI/CD deploy.",
+      "9 AWS services deployed end-to-end: Cognito (RBAC + JWT), API Gateway HTTP v2, Lambda, DynamoDB, S3 (pre-signed uploads), CloudFront (OAC), SES, EventBridge, CloudWatch",
+      "Full product lifecycle shipped: Figma design system → React 18 + TypeScript frontend → serverless backend → CI/CD — $0–2/month operating cost",
+      "Production patterns throughout: least-privilege IAM, Zod schema sharing across frontend and Lambda, TanStack Query cache invalidation, EventBridge decoupling so SES failure never affects core request flow",
     ],
     diagram:
-      "React → CloudFront → API Gateway (JWT/Cognito) → Lambda → DynamoDB\n                                                              ↓ EventBridge → SES / SNS",
+      "React → CloudFront → API Gateway (JWT/Cognito) → Lambda → DynamoDB\n                                                              ↓ EventBridge → SES",
     links: [
+      {
+        label: "Live Demo",
+        href: "https://d2m1l4se2aia7z.cloudfront.net",
+        external: true,
+      },
       {
         label: "Repo",
         href: "https://github.com/JasonWeimar/clientflow-portal",
@@ -106,6 +120,7 @@ export const featuredProjects: FeaturedProject[] = [
         label: "Figma",
         href: "https://www.figma.com/proto/oJFmuI4LtDbxAclJpWCB4D/02-Screens-Desktop?page-id=0%3A1&node-id=10-2&p=f&viewport=-201%2C410%2C0.08&t=7LZr5Vkwwvbm912B-1&scaling=min-zoom&content-scaling=fixed&starting-point-node-id=10%3A2",
         external: true,
+        variant: "ghost",
       },
     ],
     tags: ["React", "TypeScript", "AWS", "TailwindCSS", "Serverless"],

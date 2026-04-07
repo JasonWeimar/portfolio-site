@@ -75,12 +75,12 @@ export const proofTiles = [
   {
     title: "ClientFlow Portal",
     lines: [
-      "Phase E — Wiring pages to live Lambda + API Gateway",
-      "Phases A–D complete: scaffold → components → auth/routing → Lambda/API",
-      "24 components · 7 screens · 9 AWS services · event-driven",
+      "Live — client sign-up open, admin demo coming",
+      "9 AWS services · Cognito RBAC · EventBridge + SES",
+      "Figma → React + TypeScript → deployed · $0–2/mo",
       {
-        label: "View Figma",
-        href: "https://www.figma.com/proto/oJFmuI4LtDbxAclJpWCB4D/02-Screens-Desktop?page-id=0%3A1&node-id=10-2",
+        label: "Live Demo",
+        href: "https://d2m1l4se2aia7z.cloudfront.net",
         external: true,
       },
     ],

@@ -54,9 +54,8 @@ export const siteConfig = {
   about: [
     "AWS Certified Developer (DVA-C02) and full-stack engineer building serverless systems on AWS and polished React frontends. I care about things that are fast to verify: clear logs, least-privilege IAM, predictable behavior end-to-end.",
     "My background is enterprise IT — Lockheed Martin L3 Desktop Support, then Senior IT Systems Project Lead at the U.S. Patent & Trademark Office. That means I've worked in zero-downtime environments, written SOPs that other people actually use, and debugged production issues with structured root-cause methodology. That context makes me a better cloud engineer: I scope permissions properly, instrument for observability early, and build systems that are easy to hand off.",
-    "On the development side, I'm full-stack across React, JavaScript/TypeScript, Node, Python, and serverless AWS. I'm comfortable with both relational and non-relational data models and I like building projects where the frontend and backend fit together cleanly - not simply wired up, but designed to work as a system.",
-    "Outside of development, I'm a lifelong creative (music production, photography, color grading, design). That shows up directly in my UI work: layout decisions, typographic rhythm, color choices - the details that give a product feeling, intent and style.",
-    "I'm excited for the oportunity to join & grow with team, building something on AWS.",
+    "On the development side, I'm full-stack across React, TypeScript, Node, Python, and serverless AWS. I'm comfortable with both relational and non-relational data models and I like building projects where the frontend and backend fit together cleanly — not just wired up, but designed to work as a system.",
+    "Outside of code, I'm a lifelong creative — music production, photography, color grading, graphic design. That shows up directly in my UI work: layout decisions, typographic rhythm, the details that make a product feel intentional rather than assembled. I'm looking for a team building something real on AWS where both the interface and the infrastructure are taken seriously.",
   ] as const,
 
   /**
@@ -64,8 +63,7 @@ export const siteConfig = {
    * Updated: March 2026
    */
   now: [
-    "ClientFlow Portal — Phase E in progress: wiring remaining pages to live Lambda + API Gateway endpoints. Phases complete: A (AWS CLI, monorepo scaffold, Figma design), B (all 24 React components), C (main.tsx, useAuth, apiClient, router, forms), D (Lambda functions + API Gateway).",
-    "Next up for ClientFlow: Phase F — deploy to S3 + CloudFront + GitHub Actions CI/CD pipeline.",
+    "ClientFlow Portal is live — client sign-up open at d2m1l4se2aia7z.cloudfront.net. Phase 3 in progress: AWS CDK for infrastructure-as-code, X-Ray distributed tracing, and custom domain via Route 53.",
     "Continuing AWS workflow labs with evidence-first READMEs and CloudWatch telemetry.",
     "Actively seeking roles in serverless full-stack or cloud-native web application development — React + Node/TypeScript frontend with AWS Lambda, DynamoDB, Cognito, and EventBridge on the backend. Best fit: teams building SaaS products, internal tools, or APIs on AWS where both UI quality and backend reliability matter.",
   ] as const,
