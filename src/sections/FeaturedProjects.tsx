@@ -36,7 +36,7 @@ function ProjectLinks({ links }: { links: FeaturedProject["links"] }) {
     <div className="mt-4 flex flex-wrap gap-2">
       {links.map((l) => {
         /**
-         * Use Button component as a consistent CTA style.
+         * We use our Button component as a consistent CTA style.
          * Under the hood, Button will render <a> when `href` is present.
          *
          * TypeScript teaching note:
@@ -45,8 +45,11 @@ function ProjectLinks({ links }: { links: FeaturedProject["links"] }) {
          */
         const common = {
           href: l.href,
-          variant: "secondary" as const,
-          "aria-label": l.label, // tiny accessibility signal, no extra UI
+          variant: (l.variant ?? "secondary") as
+            | "primary"
+            | "secondary"
+            | "ghost",
+          "aria-label": l.label,
         };
 
         /**
@@ -86,7 +89,7 @@ function ProjectLinks({ links }: { links: FeaturedProject["links"] }) {
  *
  * Design note:
  * - Grid is 1-column on mobile, 3-columns on desktop.
- * - Keep text sizes small but readable because these are "scan cards".
+ * - We keep text sizes small but readable because these are "scan cards".
  */
 export function FeaturedProjects({ items }: { items: FeaturedProject[] }) {
   return (
