@@ -117,25 +117,6 @@ export default function App() {
             <Button href="#contact" variant="secondary">
               Contact
             </Button>
-
-            {/* GitHub */}
-            <Button
-              href={siteConfig.links.github}
-              variant="secondary"
-              target="_blank"
-              rel="noreferrer"
-            >
-              GitHub
-            </Button>
-
-            <Button
-              href={siteConfig.links.resume}
-              variant="secondary"
-              target="_blank"
-              rel="noreferrer"
-            >
-              Resume
-            </Button>
           </div>
 
           {/* Proof-pills */}
